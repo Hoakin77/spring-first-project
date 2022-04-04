@@ -1,7 +1,7 @@
 package hw;
 
 import java.math.BigDecimal;
-//
+
 public class Product {
     private Long id;
 

@@ -1,7 +1,7 @@
 package ru.geekbrains.presist;
 
 import java.math.BigDecimal;
-//
+
 public class Product {
     private Long id;
     private String name;

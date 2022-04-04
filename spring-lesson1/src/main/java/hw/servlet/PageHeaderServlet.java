@@ -11,7 +11,7 @@ import java.io.IOException;
 public class PageHeaderServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+        //
         // простое меню навигации (ссылки в табличном представлении)
         resp.getWriter().println("<table><tr>");
         resp.getWriter().println("<td><a href='" + getServletContext().getContextPath() + "/http-servlet'>HttpServlet</a></td>");

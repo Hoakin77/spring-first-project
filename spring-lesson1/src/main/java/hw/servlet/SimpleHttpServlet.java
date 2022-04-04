@@ -12,6 +12,7 @@ import java.io.IOException;
 public class SimpleHttpServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        //
         // добавление аттрибутов и их значений
         req.setAttribute("pageHeader", "Основные методы HttpServlet");              // текст заголовка
         req.setAttribute("pageHeaderLvl", "h2");                                    // уровень заголовка

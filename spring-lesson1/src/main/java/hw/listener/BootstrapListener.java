@@ -11,6 +11,7 @@ import java.math.BigDecimal;
 @WebListener
 public class BootstrapListener implements ServletContextListener {
     // создание списка продуктов при инициализации сервлета
+    //
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         ProductRepository productRepository = new ProductRepository();

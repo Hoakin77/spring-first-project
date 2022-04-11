@@ -2,7 +2,6 @@ package ru.geekbrains;
 
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 import ru.geekbrains.config.AppConfig;
 import ru.geekbrains.presist.Cart;
@@ -10,6 +9,7 @@ import ru.geekbrains.presist.Product;
 import ru.geekbrains.service.CartServiceImpl;
 import ru.geekbrains.service.ProductService;
 
+import javax.annotation.PostConstruct;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -29,8 +29,8 @@ public class Main {
 
     public static void main(String[] args) {
         new AnnotationConfigApplicationContext(AppConfig.class);
-
     }
+
 
     public static void printSeparator(){
         System.out.println("------------------------------");
@@ -41,10 +41,9 @@ public class Main {
         for (Object el : list) {
             System.out.println(el.toString());
         }
-
     }
 
-    @Bean
+    @PostConstruct
     private void cartInteract() throws IOException {
         Cart cart = cartService.getNewCart();
         System.out.println("\n----- ИНТЕРАКТИВНАЯ РАБОТА С КОРЗИНОЙ ------\n");

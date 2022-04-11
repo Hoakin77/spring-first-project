@@ -10,7 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
     <packaging>war</packaging>
 
-    <artifactId>spring-lesson1</artifactId>
+    <artifactId>spring-lesson1-servelet-api</artifactId>
 
     <dependencies>
         <dependency>

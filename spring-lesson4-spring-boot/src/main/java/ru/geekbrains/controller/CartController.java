@@ -6,13 +6,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/test")
-public class TestController {
+@RequestMapping("/cart")
+public class CartController {
 
     @GetMapping
-    public String test (Model model) {
-        model.addAttribute("currentPage", "test");
+    public String cart (Model model) {
+        model.addAttribute("currentPage", "cart");
 
-        return "test";
+        return "cart";
     }
-}//
+
+}

@@ -72,5 +72,5 @@ public class CartServiceImpl implements CartService {
         Product product = productRepository.findById(prodId);
         return this.getProductQuantity(cart, product);
     }
-}//
+}
 

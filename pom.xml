@@ -8,6 +8,7 @@
         <module>spring-lesson1-servlet-api</module>
         <module>spring-lesson2-spring-basics</module>
         <module>spring-lesson3-spring-mvc</module>
+        <module>spring-lesson4-spring-boot</module>
     </modules>
 
     <groupId>org.example</groupId>

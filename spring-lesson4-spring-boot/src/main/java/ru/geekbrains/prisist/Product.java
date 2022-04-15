@@ -1,11 +1,21 @@
 package ru.geekbrains.prisist;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 import java.math.BigDecimal;
 
 public class Product {
 
     private Long id;
+
+    @NotBlank
     private String name;
+
+
+    @Max(100000)
+    @Min(0)
     private BigDecimal price;
 
     public Product(Long id, String name, BigDecimal price) {
@@ -27,4 +37,4 @@ public class Product {
     public String toString() {
         return String.format("Product {id = %-2s | name = %-15s | price = %-8s}", id, name, price);
     }
-}//
+}

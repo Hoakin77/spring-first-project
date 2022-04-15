@@ -50,4 +50,4 @@ public class AppConfig implements WebMvcConfigurer {
         thymeleafViewResolver.setForceContentType(true); // <= 2
         return thymeleafViewResolver;
     }
-}
+}//

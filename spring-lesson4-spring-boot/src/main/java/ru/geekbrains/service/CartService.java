@@ -21,4 +21,4 @@ public interface CartService {
 
     int getProductQuantity(Cart cart, Product product);
     int getProductQuantity(Cart cart, Long prodId);
-}//
+}

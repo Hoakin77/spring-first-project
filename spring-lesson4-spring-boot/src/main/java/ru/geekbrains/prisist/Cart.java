@@ -2,6 +2,7 @@ package ru.geekbrains.prisist;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+import ru.geekbrains.prisist.model.Product;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
@@ -18,19 +19,19 @@ public class Cart {
     }
 
     public void addProduct(Product product, Integer quantity) {
-        if (product != null)
-            cartMap.merge(product, quantity, Integer::sum);
+        if (product != null) cartMap.merge(product, quantity, Integer::sum);
+        if (cartMap.get(product) < 1) cartMap.remove(product);
     }
 
-    public void delProduct(Product product, Integer quantity) {
-        if (cartMap.containsKey(product)) {
-            if (quantity != null && cartMap.get(product).compareTo(quantity) > 0) {
-                cartMap.put(product, cartMap.get(product) - quantity);
-            } else {
-                cartMap.remove(product);
-            }
-        }
-    }
+//    public void delProduct(Product product, Integer quantity) {
+//        if (cartMap.containsKey(product)) {
+//            if (quantity != null && cartMap.get(product).compareTo(quantity) > 0) {
+//                cartMap.put(product, cartMap.get(product) - quantity);
+//            } else {
+//                cartMap.remove(product);
+//            }
+
+
 
     public BigDecimal getSum() {
         BigDecimal sum = BigDecimal.valueOf(0);

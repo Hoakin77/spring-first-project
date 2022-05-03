@@ -7,10 +7,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import ru.geekbrains.prisist.Product;
+import ru.geekbrains.prisist.model.Product;
 import ru.geekbrains.service.ProductService;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+
 
 @Controller
 @RequestMapping("/products")
@@ -20,21 +23,28 @@ public class ProductController {
 
     private final ProductService productService;
 
+
     @Autowired
     public ProductController(ProductService productService) {
         this.productService = productService;
     }
 
-    @GetMapping
-    public String showAll(Model model) {
-        model.addAttribute("productList", productService.getProductList());
-        model.addAttribute("currentPage", "products");
+    @ModelAttribute("activePage")
+    String activePage() {
         return "products";
     }
 
-    @GetMapping("/edit")
+    @GetMapping
+    public String showAll(Model model) {
+        model.addAttribute("productList", productService.getProductList());
+        return "products";
+    }
+
+    @GetMapping("edit")
     public String editProduct(@RequestParam(required = false) Long id,
                               @RequestParam(required = false) Boolean view,
+                              HttpServletRequest request,
+                              HttpServletResponse ignoredResponse,
                               Model model) {
         Product product;
         if (id == null) {
@@ -44,8 +54,7 @@ public class ProductController {
         }
         model.addAttribute("product", product);
         model.addAttribute("disabled", view);
-        model.addAttribute("currentPage", "products");
-
+        model.addAttribute("referer", request.getHeader("referer"));
         return "product_form";
     }
 
@@ -59,11 +68,13 @@ public class ProductController {
         return "redirect:/products";
     }
 
+
     @GetMapping("/delete")
     public String deleteProduct(@RequestParam Long id, Model model) {
-        logger.debug("New product deleted: " + productService.getProductById(id).toString());
+        logger.debug("Product deleted: " + productService.getProductById(id).toString());
         productService.deleteById(id);
         model.addAttribute("productList", productService.getProductList());
         return "redirect:/products";
     }
+
 }

@@ -25,13 +25,11 @@ public class Product {
     private Long id;
 
     @NotBlank
-    @Column(name = "name")
+    @Column(nullable = false)
     private String name;
 
 
-    @Max(100000)
-    @Min(0)
-    @Column(name = "price")
+    @Column(name = "price", nullable = false)
     private BigDecimal price;
 
     public Product(Long id, String name, BigDecimal price) {

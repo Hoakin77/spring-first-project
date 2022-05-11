@@ -4,14 +4,14 @@
       lang="ru"
       class="h-100">
 
-<head th:insert="default :: head" />
+<head th:insert="default :: head"><title></title></head>
 <body class="d-flex flex-column h-100">
 
-<header th:replace="default :: header"> </header>
+<header th:replace="default :: header (activePage=${activePage})"> </header>
 <main class="flex-shrink-0">
-    <div class="container">
-        <h2>Contacts</h2>
-    </div>
+  <div class="container">
+    <h2>Contacts</h2>
+  </div>
 </main>
 <footer th:replace="default :: footer"> </footer>
 

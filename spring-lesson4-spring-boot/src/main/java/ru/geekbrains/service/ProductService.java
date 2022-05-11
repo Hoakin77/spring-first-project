@@ -1,17 +1,41 @@
 package ru.geekbrains.service;
 
-import ru.geekbrains.prisist.Product;
+import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+import ru.geekbrains.prisist.model.Product;
+import ru.geekbrains.prisist.repository.ProductRepository;
 
+import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 
-public interface ProductService {
+@AllArgsConstructor
+@Service
+public class ProductService {
+    private final ProductRepository productRepository;
 
-    List<Product> getProductList();
+    public List<Product> findAll() {
+        return productRepository.findAll();
+    }
 
-    void saveOrUpdate(Product product);
+    public Page<Product> findAllFilteredPaged(BigDecimal minPrice, BigDecimal maxPrice, String partTitle, Integer pageIndex, Integer productsPerPage) {
+        Pageable pageRequest = PageRequest.of(pageIndex - 1, productsPerPage);
+        return productRepository.findProductsByPriceBetweenAndTitleLike(minPrice, maxPrice, "%"+partTitle+"%", pageRequest);
+    }
 
-    Product getProductById(Long id);
+    public Optional<Product> findProductById(Long id) {
+        return productRepository.findById(id);
+    }
 
-    void deleteById(Long id);
+    public Product saveOrUpdateProduct(Product product) {
+        return productRepository.save(product);
+    }
+
+    public void deleteProductById(Long id) {
+        productRepository.deleteById(id);
+    }
 
 }

@@ -1,43 +1,30 @@
 package ru.geekbrains.prisist;
 
+import lombok.Data;
 import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.WebApplicationContext;
+import ru.geekbrains.prisist.model.Product;
 
-import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 
+@Data
 @Component
-@Scope("prototype")
+@Scope(
+        value = WebApplicationContext.SCOPE_SESSION,
+        proxyMode = ScopedProxyMode.TARGET_CLASS
+)
 public class Cart {
 
-    private final Map<Product, Integer> cartMap = new HashMap<>();
+    private static final AtomicInteger COUNTER = new AtomicInteger(0);
+    private final int cartId = COUNTER.incrementAndGet();
 
+    private final Map<Product, Integer> cartMap = new HashMap<>();
     public Map<Product, Integer> getCartMap() {
         return cartMap;
-    }
-
-    public void addProduct(Product product, Integer quantity) {
-        if (product != null)
-            cartMap.merge(product, quantity, Integer::sum);
-    }
-
-    public void delProduct(Product product, Integer quantity) {
-        if (cartMap.containsKey(product)) {
-            if (quantity != null && cartMap.get(product).compareTo(quantity) > 0) {
-                cartMap.put(product, cartMap.get(product) - quantity);
-            } else {
-                cartMap.remove(product);
-            }
-        }
-    }
-
-    public BigDecimal getSum() {
-        BigDecimal sum = BigDecimal.valueOf(0);
-        for (Map.Entry<Product, Integer> entry : cartMap.entrySet()) {
-            sum = sum.add(entry.getKey().getPrice().multiply(BigDecimal.valueOf(entry.getValue())));
-        }
-        return sum;
     }
 
 }

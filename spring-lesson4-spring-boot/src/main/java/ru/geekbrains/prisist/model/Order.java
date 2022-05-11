@@ -34,23 +34,10 @@ public class Order {
             inverseJoinColumns = @JoinColumn(name = "product_id"))
     private List<Product> products;
 
-    @OneToMany(mappedBy = "order")
+    @OneToMany(mappedBy = "order", fetch = FetchType.EAGER)
     private List<CartEntry> cartEntries;
-
     @Override
     public String toString() {
         return String.format("Order {id = %s, user_id = %s}", id, user.getId());
     }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-
-
-
 }

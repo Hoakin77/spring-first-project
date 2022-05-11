@@ -1,13 +1,13 @@
-package ru.geekbrains.controller;
+package ru.geekbrains.controllers;
 
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.geekbrains.prisist.Cart;
+import ru.geekbrains.prisist.model.Product;
 import ru.geekbrains.service.CartService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,18 +16,11 @@ import java.io.IOException;
 
 @Controller
 @RequestMapping("/cart")
+@AllArgsConstructor(onConstructor = @__(@Autowired))
 public class CartController {
-
-    private static final Logger logger = LoggerFactory.getLogger(ProductController.class);
 
     private CartService cartService;
     private Cart cart;
-
-    @Autowired
-    private void cartController(CartService cartService) {
-        this.cartService = cartService;
-        cart = cartService.getNewCart();
-    }
 
     @ModelAttribute("activePage")
     String activePage() {
@@ -49,11 +42,11 @@ public class CartController {
 
     @GetMapping("/add/{product_id}")
     public void addToCart (
-            @PathVariable(name = "product_id") Long id,
+            @PathVariable(name = "product_id") Product product,
             @RequestParam(required = false, name = "q") Integer quantity,
             HttpServletRequest request,
             HttpServletResponse response) throws IOException {
-        cartService.addProduct(cart, id, quantity);
+        cartService.addProduct(cart, product, quantity);
         response.sendRedirect(request.getHeader("referer"));
     }
 
@@ -63,7 +56,7 @@ public class CartController {
             @RequestParam(required = false, name = "q") Integer quantity,
             HttpServletRequest request,
             HttpServletResponse response) throws IOException {
-            cartService.addProduct(cart, id, quantity);
+            cartService.addProductById(cart, id, quantity);
             response.sendRedirect(request.getHeader("referer"));
     }
 }

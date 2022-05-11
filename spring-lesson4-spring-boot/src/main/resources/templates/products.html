@@ -4,14 +4,46 @@
       lang="ru"
       class="h-100">
 
-<head th:insert="default :: head" />
+<head th:insert="default :: head"><title></title></head>
 <body class="d-flex flex-column h-100">
 
 <header th:replace="default :: header (activePage=${activePage})"> </header>
 <main class="flex-shrink-0">
     <div class="container">
         <div class="row py-2">
-            <form id="productListForm">
+
+            <!--фильтрация через POST-запрос-->
+            <!--<form id="productListForm" th:action="@{/products/filter}" th:object="${productFilter}" method="post">-->
+            <!--фильтрация через GET-запрос-->
+            <form id="productListForm" th:action="@{/products}" th:object="${productFilter}" method="get">
+                <!-- фильтр -->
+                <div class="row g-3 p-2 d-flex justify-content-center">
+                    <div class="form-group col-auto">
+                        <label for="minPrice">Min Price</label>
+                        <input type="number" class="form-control" id="minPrice" name="minPrice" placeholder="min"
+                               th:field="*{minPrice}">
+                    </div>
+                    <div class="form-group col-auto">
+                        <label for="maxPrice">Max Price</label>
+                        <input type="number" class="form-control" id="maxPrice" name="mapPrice" placeholder="max"
+                               th:field="*{maxPrice}">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="partTitle">Part Title</label>
+                        <input type="text" class="form-control" id="partTitle" placeholder="name contains..."
+                               th:field="*{partTitle}">
+                    </div>
+                    <div class="form-group col-auto">
+                        <label for="btnApply"></label>
+                        <input type="submit" class="form-control btn btn-secondary" id="btnApply" value="Apply">
+                    </div>
+                    <div class="form-group col-auto">
+                        <label for="btnClear"></label>
+                        <a class="form-control btn btn-light" id="btnClear"
+                           th:href="@{/products}" >Clear</a>
+                    </div>
+                </div>
+
                 <div class="d-flex justify-content-start">
                     <div class="col-4">
                         <a type="button" class="btn btn-success" th:href="@{/products/edit}">New product</a>
@@ -41,7 +73,7 @@
                         <td class="text-center" ><span th:text="${i.count}"> # </span></td>
                         <td class="text-center" ><span th:text="${product.id}"> ID </span></td>
                         <td class="text-start" >
-                            <a th:text="${product.name}"
+                            <a th:text="${product.title}"
                                th:href="@{'/products/edit?view=1&id=' + ${product.id}}"
                                class="list-group-item list-group-item-action"
                                data-toggle="tooltip" data-placement="top" title="Просмотреть сведения">
@@ -86,6 +118,37 @@
                     </tr>
                     </tbody>
                 </table>
+                <nav th:if="${currentPage != null}" aria-label="Products page navigation">
+                    <ul class="pagination justify-content-center">
+                        <li th:if="${previousPage == null}" class="page-item disabled" >
+                            <a class="page-link" ><i class="bi bi-backspace"></i></a>
+                        </li>
+                        <li th:unless="${previousPage == null}" class="page-item">
+                            <a class="page-link"
+                               th:href="@{/products/{pageIndex}
+                               (pageIndex=${previousPage}, minPrice=*{minPrice}, maxPrice=*{maxPrice}, partTitle=*{partTitle}, productsPerPage=${productsPerPage})}">
+                                <i class="bi bi-arrow-left-square-fill"></i>
+                                <span th:text="${previousPage}">Previous</span>
+                            </a>
+                        </li>
+
+                        <li class="page-item disabled">
+                            <span class="page-link" th:text="${currentPage}"> Current </span>
+                        </li>
+
+                        <li th:unless="${nextPage == null}" class="page-item">
+                            <a class="page-link"
+                               th:href="@{/products/{pageIndex}
+                               (pageIndex=${nextPage}, minPrice=*{minPrice}, maxPrice=*{maxPrice}, partTitle=*{partTitle}, productsPerPage=${productsPerPage})}">
+                                <span th:text="${nextPage}">Next</span>
+                                <i class="bi bi-arrow-right-square-fill"></i>
+                            </a>
+                        </li>
+                        <li th:if="${nextPage == null}" class="page-item disabled" >
+                            <a class="page-link" ><i class="bi bi-backspace-reverse"></i></a>
+                        </li>
+                    </ul>
+                </nav>
             </form>
         </div>
     </div>

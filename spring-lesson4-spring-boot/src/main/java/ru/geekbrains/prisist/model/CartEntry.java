@@ -9,6 +9,7 @@ import java.math.BigDecimal;
 @Entity
 @Table(name = "order_products")
 public class CartEntry {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")

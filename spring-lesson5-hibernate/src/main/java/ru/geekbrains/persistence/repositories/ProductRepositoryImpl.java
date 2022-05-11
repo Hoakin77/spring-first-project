@@ -1,10 +1,12 @@
 package ru.geekbrains.persistence.repositories;
 
 import jakarta.persistence.EntityManager;
+import org.springframework.stereotype.Repository;
 import ru.geekbrains.persistence.model.Product;
 
 import java.util.List;
 
+@Repository
 public class ProductRepositoryImpl implements ProductRepository {
 
 /*

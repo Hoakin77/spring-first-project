@@ -2,7 +2,10 @@ package ru.geekbrains.service;
 
 
 import org.springframework.beans.factory.annotation.Lookup;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.WebApplicationContext;
 import ru.geekbrains.persistence.Cart;
 import ru.geekbrains.persistence.model.Product;
 import ru.geekbrains.persistence.repositories.ProductRepository;
@@ -14,7 +17,7 @@ import java.util.Map;
 
 
 @Service
-//@Scope(value = WebApplicationContext.SCOPE_SESSION, proxyMode = ScopedProxyMode.TARGET_CLASS)
+@Scope(value = WebApplicationContext.SCOPE_SESSION, proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class CartServiceImpl implements CartService {
 
     private final ProductRepository productRepository;

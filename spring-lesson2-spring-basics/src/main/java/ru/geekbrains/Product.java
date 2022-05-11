@@ -1,4 +1,4 @@
-package ru.geekbrains.presist;
+package ru.geekbrains;
 
 import java.math.BigDecimal;
 

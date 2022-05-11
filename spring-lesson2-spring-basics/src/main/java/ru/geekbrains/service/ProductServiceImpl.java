@@ -2,8 +2,8 @@ package ru.geekbrains.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.geekbrains.presist.Product;
-import ru.geekbrains.presist.ProductRepository;
+import ru.geekbrains.Product;
+import ru.geekbrains.ProductRepository;
 
 import java.util.List;
 

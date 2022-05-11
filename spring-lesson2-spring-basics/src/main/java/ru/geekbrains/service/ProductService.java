@@ -1,6 +1,6 @@
 package ru.geekbrains.service;
 
-import ru.geekbrains.presist.Product;
+import ru.geekbrains.Product;
 
 import java.util.List;
 

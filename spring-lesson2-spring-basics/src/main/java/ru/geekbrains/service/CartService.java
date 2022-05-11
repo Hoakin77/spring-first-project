@@ -1,7 +1,7 @@
 package ru.geekbrains.service;
 
-import ru.geekbrains.presist.Cart;
-import ru.geekbrains.presist.Product;
+import ru.geekbrains.Cart;
+import ru.geekbrains.Product;
 
 import java.math.BigDecimal;
 

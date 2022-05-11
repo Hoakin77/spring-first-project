@@ -25,21 +25,21 @@ public class PersistenceConfig {
         dataSource.setPassword("");
 */
 
-        // === PostgreSQL + jdbc.datasource ===
-        DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setUrl("jdbc:postgresql://localhost:3306/geekshop");
-        dataSource.setDriverClassName("org.postgresql.Driver");
-        dataSource.setUsername("postgres");
-        dataSource.setPassword("postgres");
+//        // === PostgreSQL + jdbc.datasource ===
+//        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+//        dataSource.setUrl("jdbc:postgresql://localhost:3306/geekshop");
+//        dataSource.setDriverClassName("org.postgresql.Driver");
+//        dataSource.setUsername("postgres");
+//        dataSource.setPassword("postgres");
 
-/*
+
         // === MySQL + jdbc.datasource ===
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
         dataSource.setUrl("jdbc:mysql://localhost:3306/geekshop?createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true&useSSL=false&useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC");
         dataSource.setUsername("root");
         dataSource.setPassword("root");
-*/
+
 
         return dataSource;
     }
@@ -49,12 +49,12 @@ public class PersistenceConfig {
         // вместо hibernateProperties.setProperty можно, а иногда даже предпочтительнее, использовать hibernateProperties.put.
         // java.util.Properties (extends Hashtable, which is synchronized by default) is a special purpose Map<String, String>.
         // It is developed to read/write from/to properties files. It has special methods to do so [see load(..)]. Map does not.
-        hibernateProperties.setProperty("hibernate.hbm2ddl.auto", "none");
+        hibernateProperties.setProperty("hibernate.hbm2ddl.auto", "fterge");
         hibernateProperties.setProperty("hibernate.show_sql", "true");
 
-        hibernateProperties.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQL94Dialect");
+       // hibernateProperties.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQL94Dialect");
 //        hibernateProperties.setProperty("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
-//        hibernateProperties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
+          hibernateProperties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
 
         // если использовать setProperty, то numeric передавать как строки "3", "20", "10"
         hibernateProperties.put("hibernate.max_fetch_depth", 3);
@@ -68,7 +68,7 @@ public class PersistenceConfig {
     public LocalSessionFactoryBean entityManagerFactory() {
         LocalSessionFactoryBean factory = new LocalSessionFactoryBean(); // фабрика
         factory.setDataSource(dataSource()); // источник (БД)
-        factory.setPackagesToScan("com.geekbrains.persistence.entities"); // ссылка на классы-сущности
+        factory.setPackagesToScan("ru.geekbrains.persistence.model"); // ссылка на классы-сущности
         factory.setHibernateProperties(hibernateProperties()); // настройки Hibernate
         return factory;
     }

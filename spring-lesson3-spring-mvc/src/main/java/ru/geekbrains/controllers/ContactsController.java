@@ -1,4 +1,4 @@
-package ru.geekbrains.controller;
+package ru.geekbrains.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -6,13 +6,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/test")
-public class TestController {
+@RequestMapping("/contacts")
+public class ContactsController {
 
     @GetMapping
-    public String test (Model model) {
-        model.addAttribute("currentPage", "test");
+    public String contacts (Model model) {
+        model.addAttribute("currentPage", "contacts");
 
-        return "test";
+        return "contacts";
     }
-}//
+}

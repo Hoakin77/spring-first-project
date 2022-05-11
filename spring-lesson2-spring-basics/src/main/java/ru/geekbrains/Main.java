@@ -4,8 +4,6 @@ package ru.geekbrains;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Component;
 import ru.geekbrains.config.AppConfig;
-import ru.geekbrains.presist.Cart;
-import ru.geekbrains.presist.Product;
 import ru.geekbrains.service.CartServiceImpl;
 import ru.geekbrains.service.ProductService;
 

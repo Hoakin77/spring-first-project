@@ -2,9 +2,9 @@ package ru.geekbrains.service;
 
 import org.springframework.beans.factory.annotation.Lookup;
 import org.springframework.stereotype.Service;
-import ru.geekbrains.presist.Cart;
-import ru.geekbrains.presist.Product;
-import ru.geekbrains.presist.ProductRepository;
+import ru.geekbrains.Cart;
+import ru.geekbrains.Product;
+import ru.geekbrains.ProductRepository;
 
 import java.math.BigDecimal;
 import java.util.Map;

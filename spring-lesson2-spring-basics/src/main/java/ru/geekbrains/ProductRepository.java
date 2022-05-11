@@ -1,4 +1,4 @@
-package ru.geekbrains.presist;
+package ru.geekbrains;
 
 import org.springframework.stereotype.Component;
 
